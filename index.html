@@ -14,8 +14,12 @@
   <link rel="stylesheet" href="explore.css">
   <link rel="stylesheet" href="why-space.css">
   <link rel="stylesheet" href="missions.css">
+  <link rel="stylesheet" href="learning-paths.css">
+  <link rel="stylesheet" href="final-cta.css">
+  <link rel="stylesheet" href="footer.css">
 </head>
 <body>
+  <a href="#solar-system" class="skip-link">Skip to main content</a>
   <main>
   <section class="stage" id="planets" aria-label="Planet explorer">
     <div class="sky">
@@ -24,8 +28,9 @@
     <div class="planet-controls"><span id="rotation-help" class="sr-only">Drag to explore. Use arrow keys to rotate the focused planet.</span><button class="rotation-toggle" type="button" aria-label="Pause rotation" title="Pause rotation" aria-pressed="false"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path class="pause-symbol" d="M7 5v10M13 5v10"/><path class="play-symbol" d="m7 4 9 6-9 6Z"/></svg></button></div>
     <div class="stars" aria-hidden="true"></div>
     <div class="ui">
-      <header class="navbar"><div class="navrow"><a class="logo" href="#">space<i>edu</i></a><nav class="links" id="site-nav"><a href="#" aria-current="page">Planets</a><a href="#">Tuition</a><a href="#">Tutorials</a><a href="#">Blog</a><a class="enroll" href="#">Enroll</a></nav><button class="burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button></div></header>
-      <section class="copy" aria-live="polite">
+      <header class="navbar"><div class="navrow"><a class="logo" href="#planets" aria-label="SpaceEdu homepage">space<i>edu</i></a><nav class="links" id="site-nav"><a href="#planets" aria-current="page">Planets</a><button type="button" class="nav-placeholder" title="Tuition (coming soon)" aria-label="Tuition (coming soon)">Tuition</button><a href="#start-exploring">Tutorials</a><button type="button" class="nav-placeholder" title="Blog (coming soon)" aria-label="Blog (coming soon)">Blog</button><a class="enroll" href="#final-cta">Enroll</a></nav><button class="burger" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button></div></header>
+      <section class="copy">
+        <div id="planet-announcement" class="sr-only" aria-live="polite" aria-atomic="true"></div>
         <div class="col eyebrow"><span class="ent-mask"><span class="ent-line">PLANET</span></span></div>
         <h1 class="col title"><span class="ent-mask"><span class="ent-line">EARTH</span></span></h1>
         <div class="col rule"><span></span></div>
@@ -33,7 +38,7 @@
         <div class="col cta">
           <button class="planet planet-l" type="button" data-slot="l"><img data-planet="earth" alt="" src="assets/ui/earth-thumbnail.webp"><img data-planet="venus" alt="" src="assets/ui/venus-thumbnail.webp"><img data-planet="mars" alt="" src="assets/ui/mars-thumbnail.webp"><span class="label label-l"></span></button>
           <button class="planet planet-r" type="button" data-slot="r"><img data-planet="earth" alt="" src="assets/ui/earth-thumbnail.webp"><img data-planet="venus" alt="" src="assets/ui/venus-thumbnail.webp"><img data-planet="mars" alt="" src="assets/ui/mars-thumbnail.webp"><span class="label label-r"></span></button>
-          <a href="#">GET STARTED</a>
+          <a href="#start-exploring">GET STARTED</a>
         </div>
       </section>
     </div>
@@ -114,11 +119,167 @@
       <p class="missions-caption">Four milestones in an ongoing journey of discovery.</p>
     </div>
   </section>
+  <section class="learning-paths" id="start-exploring" data-homepage-section aria-labelledby="learning-title">
+    <div class="learning-paths-inner">
+      <header class="learning-paths-heading">
+        <p class="learning-paths-kicker">04 / START EXPLORING</p>
+        <h2 id="learning-title">Your Journey Into Space<br> Starts Here</h2>
+        <p class="learning-paths-intro">Curiosity is the beginning of exploration. Choose a learning path to deepen your understanding of the cosmos, from the worlds next door to the frontiers of human discovery.</p>
+      </header>
+      <ol class="learning-grid" aria-label="Learning paths">
+        <li class="learning-card">
+          <div class="learning-card-header">
+            <span class="learning-number">01</span>
+            <div class="learning-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3.5" fill="currentColor" fill-opacity="0.3" stroke="currentColor"/>
+                <ellipse cx="12" cy="12" rx="9.5" ry="4.5" transform="rotate(-28 12 12)" stroke="currentColor"/>
+                <circle cx="18.5" cy="8.5" r="1.2" fill="currentColor"/>
+              </svg>
+            </div>
+          </div>
+          <div class="learning-card-body">
+            <h3 class="learning-title">Solar System</h3>
+            <p class="learning-desc">Understand the worlds orbiting our Sun — from rocky inner planets to distant ice giants.</p>
+          </div>
+          <div class="learning-card-footer">
+            <button type="button" class="learning-cta" data-scroll-to="#solar-system" aria-label="Explore Solar System learning path">
+              <span>Explore</span>
+              <span class="learning-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </li>
+        <li class="learning-card">
+          <div class="learning-card-header">
+            <span class="learning-number">02</span>
+            <div class="learning-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19C5.5 12.5 10.5 7 19 6"/>
+                <path d="M19 6H14.5M19 6V10.5"/>
+                <circle cx="4" cy="19" r="2" fill="currentColor"/>
+                <circle cx="19" cy="6" r="1.5" fill="currentColor"/>
+              </svg>
+            </div>
+          </div>
+          <div class="learning-card-body">
+            <h3 class="learning-title">Space Missions</h3>
+            <p class="learning-desc">Explore the spacecraft, discoveries and missions that expanded humanity's view of the universe.</p>
+          </div>
+          <div class="learning-card-footer">
+            <button type="button" class="learning-cta" data-scroll-to="#historic-missions" aria-label="Explore Space Missions learning path">
+              <span>Explore</span>
+              <span class="learning-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </li>
+        <li class="learning-card">
+          <div class="learning-card-header">
+            <span class="learning-number">03</span>
+            <div class="learning-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M2 12h20" stroke-dasharray="2 2" stroke-opacity="0.45"/>
+                <path d="M12 4.5L14 10l5.5 2-5.5 2-2 5.5-2-5.5L4.5 12l5.5-2 2-5.5Z" fill="currentColor" fill-opacity="0.25" stroke="currentColor"/>
+              </svg>
+            </div>
+          </div>
+          <div class="learning-card-body">
+            <h3 class="learning-title">Astronomy Basics</h3>
+            <p class="learning-desc">Learn the fundamentals of stars, galaxies, gravity, light and the structure of the cosmos.</p>
+          </div>
+          <div class="learning-card-footer">
+            <button type="button" class="learning-cta" data-scroll-to="#why-explore-space" aria-label="Explore Astronomy Basics learning path">
+              <span>Explore</span>
+              <span class="learning-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </li>
+        <li class="learning-card">
+          <div class="learning-card-header">
+            <span class="learning-number">04</span>
+            <div class="learning-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 17L12 6L20 17"/>
+                <path d="M7 19L12 12L17 19" stroke-opacity="0.6"/>
+                <circle cx="12" cy="6" r="1.5" fill="currentColor"/>
+              </svg>
+            </div>
+          </div>
+          <div class="learning-card-body">
+            <h3 class="learning-title">The Future of Space</h3>
+            <p class="learning-desc">Discover upcoming missions, human exploration, new technologies and where space exploration may take us next.</p>
+          </div>
+          <div class="learning-card-footer">
+            <button type="button" class="learning-cta" data-scroll-to="#final-cta" aria-label="Explore The Future of Space learning path">
+              <span>Explore</span>
+              <span class="learning-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <section class="final-cta" id="final-cta" data-homepage-section aria-labelledby="cta-title">
+    <div class="final-cta-horizon" aria-hidden="true"></div>
+    <div class="final-cta-inner">
+      <p class="final-cta-kicker">READY TO EXPLORE?</p>
+      <h2 id="cta-title">The Universe Is Waiting</h2>
+      <p class="final-cta-copy">Curiosity has taken humanity beyond our world.<br>Your journey can start here.</p>
+      <div class="final-cta-actions">
+        <button type="button" class="final-cta-btn-primary" aria-label="Start exploring learning paths">START EXPLORING</button>
+        <button type="button" class="final-cta-btn-secondary" aria-label="Explore the planets in the solar system">EXPLORE THE PLANETS</button>
+      </div>
+    </div>
+  </section>
   </main>
+  <footer class="site-footer" aria-label="Site footer">
+    <div class="site-footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <button type="button" class="footer-logo" data-scroll-to="#planets" aria-label="SpaceEdu home, scroll to top">space<i>edu</i></button>
+          <p class="footer-tagline">Explore. Learn. Discover.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-group">
+            <h3>Explore</h3>
+            <ul>
+              <li><button type="button" class="footer-link" data-scroll-to="#planets">Planets</button></li>
+              <li><button type="button" class="footer-link" data-scroll-to="#historic-missions">Missions</button></li>
+              <li><button type="button" class="footer-link" data-scroll-to="#start-exploring">Astronomy</button></li>
+            </ul>
+          </div>
+          <div class="footer-group">
+            <h3>Learn</h3>
+            <ul>
+              <li><button type="button" class="footer-link" data-scroll-to="#start-exploring">Tutorials</button></li>
+              <li><span class="footer-link footer-link--placeholder">Resources</span></li>
+            </ul>
+          </div>
+          <div class="footer-group">
+            <h3>Connect</h3>
+            <ul>
+              <li><button type="button" class="footer-link" data-scroll-to="#why-explore-space">About</button></li>
+              <li><a href="https://github.com/aashishlabs/aashishlabs-spaceedu" target="_blank" rel="noopener" class="footer-link">GitHub ↗</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 SpaceEdu. An AashishLabs learning experience.</p>
+        <div class="footer-legal">
+          <a href="CREDITS.md" target="_blank" class="footer-sublink">Credits</a>
+          <span class="footer-sublink footer-link--placeholder">Privacy</span>
+          <span class="footer-sublink footer-link--placeholder">Terms</span>
+        </div>
+      </div>
+    </div>
+  </footer>
   <script src="homepage-scroll.js" defer></script>
   <script src="explore.js" defer></script>
   <script src="why-space.js" defer></script>
   <script src="missions.js" defer></script>
+  <script src="learning-paths.js" defer></script>
+  <script src="final-cta.js" defer></script>
+  <script src="footer.js" defer></script>
   <script>
     (()=>{
       const ORDER=['earth','venus','mars'];
@@ -134,7 +295,7 @@
       function progress(opacity,y){copy.style.setProperty('--switch-opacity',opacity);copy.style.setProperty('--switch-y',y+'px')}
       function lock(value){busy=value;stage.dataset.switching=String(value);copy.setAttribute('aria-busy',String(value));buttons.forEach(button=>button.setAttribute('aria-disabled',String(value)));cta.setAttribute('aria-disabled',String(value))}
       function fill(button,planet){button.dataset.planet=planet;button.setAttribute('aria-label','Show '+DATA[planet].name);button.querySelectorAll('img').forEach(img=>img.classList.toggle('is-shown',img.dataset.planet===planet));labels[button.dataset.slot].textContent=DATA[planet].name}
-      function commit(next){featured=next;sky.style.backgroundImage=`url('${DATA[next].still}')`;title.textContent=DATA[next].name;lede.innerHTML=DATA[next].lede;const rest=ORDER.filter(x=>x!==next);fill(buttons[0],rest[0]);fill(buttons[1],rest[1]);copy.dataset.planet=next;cta.dataset.planet=next;cta.setAttribute('aria-label','Get started with '+DATA[next].name)}
+      function commit(next){featured=next;sky.style.backgroundImage=`url('${DATA[next].still}')`;title.textContent=DATA[next].name;lede.innerHTML=DATA[next].lede;const rest=ORDER.filter(x=>x!==next);fill(buttons[0],rest[0]);fill(buttons[1],rest[1]);copy.dataset.planet=next;cta.dataset.planet=next;cta.setAttribute('aria-label','Get started with '+DATA[next].name);const live=document.getElementById('planet-announcement');if(live)live.textContent=DATA[next].name+'. '+DATA[next].lede.replace(/<br>/g,' ');}
       async function show(next){if(busy||!DATA[next]||next===featured)return;if(!hero){commit(next);return}target=next;lock(true);try{await hero.select(next)}finally{target=null;progress(1,0);lock(false)}}
       cta.addEventListener('click',event=>{if(busy)event.preventDefault()});
       buttons.forEach(button=>button.addEventListener('click',()=>show(button.dataset.planet)));commit('earth');lock(true);
@@ -145,6 +306,7 @@
         hero=ready;stage.classList.add('has-3d');lock(false);
       }).catch(fallback);
       const row=document.querySelector('.navrow'),burger=document.querySelector('.burger'),nav=document.querySelector('.links');function setMenu(open){row.dataset.open=String(open);burger.setAttribute('aria-expanded',String(open));burger.setAttribute('aria-label',(open?'Close':'Open')+' navigation')}setMenu(false);burger.addEventListener('click',e=>{e.stopPropagation();setMenu(row.dataset.open!=='true')});document.addEventListener('click',e=>{if(!row.contains(e.target))setMenu(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){setMenu(false);burger.focus()}});nav.addEventListener('click',()=>setMenu(false));
+      document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const h=a.getAttribute('href');if(!h||h==='#')return;const t=document.querySelector(h);if(t){e.preventDefault();t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});if(!t.hasAttribute('tabindex'))t.setAttribute('tabindex','-1');t.focus({preventScroll:true})}});
       if(document.documentElement.classList.contains('anim')){Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,500))]).then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{document.documentElement.classList.add('play');setTimeout(()=>document.documentElement.classList.remove('anim','play'),2150)})))}
     })();
   </script>
