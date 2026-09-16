@@ -4,7 +4,6 @@
 .planet-renderer canvas:focus-visible{outline:2px solid var(--cyan);outline-offset:-5px}
 .ui{pointer-events:none;transform:translateZ(0)}.navbar{pointer-events:auto}
 .stage.has-3d .sky{background-image:radial-gradient(ellipse at 48% 90%,#112c4a 0%,#030b17 58%,#020711 100%)!important}
-.stage.has-3d .sky video{display:none}
 .planet-controls{display:none;position:absolute;z-index:4;bottom:max(16px,env(safe-area-inset-bottom));right:20px;align-items:center}
 .has-3d .planet-controls{display:flex}
 .rotation-toggle{display:grid;place-items:center;color:#d3e2ed;border:1px solid transparent;background:#04101f38;border-radius:50%;width:44px;height:44px;opacity:.4;cursor:pointer;transition:opacity .2s,border-color .2s}
@@ -19,4 +18,3 @@
 .stage[data-switching="true"] .planet,.stage[data-switching="true"] .cta>a{cursor:progress}
 @media(max-width:579px){.planet-controls{right:12px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.anim .ent-line,.anim .rule span,.anim .navbar::after{transform:none!important}.anim .logo,.anim .links a,.anim .burger,.anim p.lede,.anim .label,.anim .cta>a,.anim .scroll,.anim .sky{opacity:1!important}}
-.stage{overflow:clip}

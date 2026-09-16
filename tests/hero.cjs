@@ -102,7 +102,8 @@ fs.mkdirSync('test-results', { recursive: true });
       await mobile.setViewportSize(viewport);
       await mobile.waitForTimeout(100);
       const box = await mobile.locator('canvas').boundingBox();
-      assert.equal(box.width, viewport.width); assert.equal(box.height, viewport.height);
+      const stage = await mobile.locator('.stage').boundingBox();
+      assert.equal(box.width, viewport.width); assert.equal(box.height, stage.height);
       assert.equal(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
       await mobile.screenshot({ path: `test-results/mobile-${viewport.width}.png` });
     }
@@ -116,7 +117,7 @@ fs.mkdirSync('test-results', { recursive: true });
     assert.equal(await fallback.locator('canvas').count(), 0);
     await fallback.getByRole('button', { name: 'Show MARS', exact: true }).click();
     assert.equal(await fallback.locator('h1').innerText(), 'MARS');
-    assert.match(await fallback.locator('.sky').evaluate(e => e.style.backgroundImage), /0ba6de7c/);
+    assert.match(await fallback.locator('.sky').evaluate(e => e.style.backgroundImage), /mars-fallback/);
     await fallback.screenshot({ path: 'test-results/fallback.png' });
     // Lose a real context after the user has switched worlds.
     await p.locator('canvas').evaluate(canvas => canvas.getContext('webgl2').getExtension('WEBGL_lose_context').loseContext());

@@ -9,5 +9,6 @@ SpaceEdu is an independent fictional portfolio demo for AashishLabs.
 - Earth normal and specular maps: Three.js r160 planet examples, https://github.com/mrdoob/three.js/tree/r160/examples/textures/planets.
 - Hanken Grotesk, Poppins and Prata: Google Fonts, https://fonts.google.com/ — SIL Open Font License; see `assets/fonts/*-OFL.txt`.
 - The original planet cutouts and fallback backgrounds were supplied by the existing demo. Their original URLs remain in `original.html`.
+- `assets/ui/` contains 288px selector images, a 48px favicon, and full-resolution WebP fallbacks derived from those supplied images. `prepare-ui-assets.cjs` regenerates them without modifying the originals or Three.js maps. The small SVG starfield is generated locally with fixed, irregular positions.
 
 Reference supplied for the interaction direction: https://www.youtube.com/watch?v=5V7FiduSrpw (2:29–3:27). The reference video could not be retrieved during this implementation; no code or media was copied from it.
