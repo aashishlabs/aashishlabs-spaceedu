@@ -18,9 +18,19 @@
   const startBtn = document.querySelector('.final-cta-btn-primary');
   const exploreBtn = document.querySelector('.final-cta-btn-secondary');
   startBtn?.addEventListener('click', () => {
-    document.querySelector('#start-exploring')?.scrollIntoView({ behavior: motion.matches ? 'instant' : 'smooth' });
+    const target = document.querySelector('#start-exploring');
+    if (target) {
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+      target.scrollIntoView({ behavior: motion.matches ? 'instant' : 'smooth' });
+    }
   });
   exploreBtn?.addEventListener('click', () => {
-    document.querySelector('#solar-system')?.scrollIntoView({ behavior: motion.matches ? 'instant' : 'smooth' });
+    const target = document.querySelector('#solar-system');
+    if (target) {
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+      target.scrollIntoView({ behavior: motion.matches ? 'instant' : 'smooth' });
+    }
   });
 })();

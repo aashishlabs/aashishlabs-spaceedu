@@ -126,7 +126,7 @@ export async function createHero({ host, initial, onFailure, onCommit, onProgres
   }
   function layout() {
     if (disposed) return;
-    const { width, height } = host.getBoundingClientRect();
+    const { width, height, top } = host.getBoundingClientRect();
     const aspect = width / height;
     camera.left = -aspect; camera.right = aspect;
     camera.updateProjectionMatrix();
@@ -135,6 +135,12 @@ export async function createHero({ host, initial, onFailure, onCommit, onProgres
     // Match the original full-bleed horizon, including portrait and short screens.
     radius = width < 600 ? 1.1 : 1.35;
     horizon = height < 621 ? .34 : .08;
+    // Keep the mobile globe (including its atmosphere) below the selector row.
+    if (matchMedia('(max-width: 600px)').matches) {
+      const controls = host.closest('.stage').querySelector('.cta');
+      const controlsBottom = controls.getBoundingClientRect().bottom - top;
+      horizon = Math.max(horizon, 2 * (controlsBottom + 24) / height - 1 + radius * .02);
+    }
     for (const world of worlds.values()) {
       world.group.scale.setScalar(radius);
       world.group.position.set(0, -radius - horizon, 0);
@@ -249,7 +255,9 @@ export async function createHero({ host, initial, onFailure, onCommit, onProgres
   listen(motion, 'change', () => { paused = motion.matches; updatePause(); previous = 0; wake(); });
   listen(document, 'visibilitychange', () => { previous = 0; if (document.hidden) release(); else wake(); });
   listen(canvas, 'webglcontextlost', event => { event.preventDefault(); dispose(); onFailure(new Error('WebGL context lost')); });
-  const observer = new ResizeObserver(layout);
+  const observer = new ResizeObserver(entries => {
+    if (entries.some(entry => entry.target === host) || matchMedia('(max-width: 600px)').matches) layout();
+  });
   const intersection = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; previous = 0; wake(); });
   function dispose() {
     if (disposed) return;
@@ -269,7 +277,8 @@ export async function createHero({ host, initial, onFailure, onCommit, onProgres
     canvas.dataset.planet = initial;
     canvas.setAttribute('aria-busy', 'false');
     host.append(canvas); layout(); renderer.render(scene, camera);
-    observer.observe(host); intersection.observe(host); updatePause(); wake();
+    observer.observe(host); observer.observe(host.closest('.stage').querySelector('.cta'));
+    intersection.observe(host); updatePause(); wake();
     listen(window, 'pagehide', event => { if (!event.persisted) dispose(); });
     return { select, dispose };
   } catch (error) { dispose(); throw error; }

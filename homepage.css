@@ -86,8 +86,10 @@ p.lede br{display:none}
   .cta>a{grid-column:1/-1;justify-self:center;min-width:182px}
   .planet-l{grid-column:1;grid-row:2}.planet-r{grid-column:2;grid-row:2}
   .planet{min-height:72px;padding:2px;gap:2px}.planet img{width:58px;height:58px}
+  .planet img{width:54px;height:54px}
   .label{font-size:13px;letter-spacing:.12em;padding:7px 6px}
 }
+@media(max-width:360px){.planet img{width:52px;height:52px}.planet{min-height:66px}}
 @media(max-height:500px) and (min-width:601px){
   .navrow{min-height:72px}.copy{padding-top:28px;padding-bottom:200px}
   h1.title{font-size:72px;margin-top:12px}.rule{margin-top:16px}
