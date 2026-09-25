@@ -49,6 +49,7 @@
   const close = panel.querySelector('.intelligence-close');
   const back = panel.querySelector('.intelligence-prev');
   const forward = panel.querySelector('.intelligence-next');
+  const announcement = panel.querySelector('#intelligence-announcement');
   let selected = -1;
 
   function hide(returnFocus = false) {
@@ -56,6 +57,7 @@
     const old = selected;
     selected = -1;
     worlds[old].classList.remove('is-selected');
+    worlds[old].querySelector('summary').setAttribute('aria-expanded', 'false');
     panel.classList.remove('is-open');
     panel.setAttribute('aria-hidden', 'true');
     panel.inert = true;
@@ -70,7 +72,11 @@
     if (selected >= 0 && selected !== i) worlds[selected].querySelector('details').open = false;
     selected = i;
     world.querySelector('details').open = true;
-    worlds.forEach((item, n) => item.classList.toggle('is-selected', n === i));
+    worlds.forEach((item, n) => {
+      const active = n === i;
+      item.classList.toggle('is-selected', active);
+      item.querySelector('summary').setAttribute('aria-expanded', String(active));
+    });
     const image = world.querySelector('.solar-portrait img');
     panel.querySelector('.intelligence-index').textContent = `${String(i + 1).padStart(2, '0')} — 08`;
     panel.querySelector('.intelligence-data-title span').textContent = `${String(i + 1).padStart(2, '0')} / 08`;
@@ -83,6 +89,9 @@
     panel.querySelector('.intelligence-source').href = world.querySelector('.solar-note a').href;
     back.disabled = i === 0;
     forward.disabled = i === worlds.length - 1;
+    back.setAttribute('aria-label', i > 0 ? `Previous planet: ${worlds[i - 1].querySelector('h3').textContent}` : 'No previous planet');
+    forward.setAttribute('aria-label', i < worlds.length - 1 ? `Next planet: ${worlds[i + 1].querySelector('h3').textContent}` : 'No next planet');
+    announcement.textContent = `${title.textContent}. ${panel.querySelector('.intelligence-class').textContent}. Planet intelligence updated.`;
     panel.inert = false;
     panel.removeAttribute('aria-hidden');
     panel.classList.add('is-open');
@@ -97,6 +106,9 @@
   }
 
   worlds.forEach((world, i) => {
+    const summary = world.querySelector('summary');
+    summary.setAttribute('aria-controls', panel.id);
+    summary.setAttribute('aria-expanded', 'false');
     world.querySelector('.solar-open').firstChild.textContent = 'Planet intelligence ';
     world.querySelector('details').addEventListener('toggle', event => {
       if (event.target.open) show(i);
