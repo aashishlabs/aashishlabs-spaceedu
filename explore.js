@@ -35,20 +35,20 @@
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   // Measurements: NASA Planetary Fact Sheet. Moon tallies: NASA Science, September 2026.
   const intelligence = [
-    {distance:'57.9 million km',diameter:'4,879 km',gravity:'3.7 m/s²',day:'176 Earth days',year:'88 Earth days',moons:'0',temperature:'167°C',fact:'A day on Mercury lasts longer than two of its years.'},
-    {distance:'108.2 million km',diameter:'12,104 km',gravity:'8.9 m/s²',day:'117 Earth days',year:'225 Earth days',moons:'0',temperature:'464°C',fact:'Venus spins backward compared with most planets.'},
-    {distance:'149.6 million km',diameter:'12,756 km',gravity:'9.8 m/s²',day:'24 hours',year:'365.2 Earth days',moons:'1',temperature:'15°C',fact:'Earth is the only known world with liquid oceans on its surface.'},
-    {distance:'228 million km',diameter:'6,792 km',gravity:'3.7 m/s²',day:'24.7 hours',year:'687 Earth days',moons:'2',temperature:'−65°C',fact:'Olympus Mons rises about 22 km above the Martian plain.'},
-    {distance:'778.5 million km',diameter:'142,984 km',gravity:'23.1 m/s²',day:'9.9 hours',year:'11.9 Earth years',moons:'115',temperature:'−110°C',fact:'Jupiter’s Great Red Spot is a storm observed for centuries.'},
-    {distance:'1.432 billion km',diameter:'120,536 km',gravity:'9.0 m/s²',day:'10.7 hours',year:'29.4 Earth years',moons:'293',temperature:'−140°C',fact:'Saturn’s rings are made chiefly of countless pieces of ice.'},
-    {distance:'2.867 billion km',diameter:'51,118 km',gravity:'8.7 m/s²',day:'17.2 hours',year:'84 Earth years',moons:'29',temperature:'−195°C',fact:'Uranus rotates on its side, giving it extreme seasons.'},
-    {distance:'4.515 billion km',diameter:'49,528 km',gravity:'11.0 m/s²',day:'16.1 hours',year:'165 Earth years',moons:'16',temperature:'−200°C',fact:'Neptune was predicted by mathematics before it was seen.'}
+    {visual:'assets/explore/intelligence/mercury.webp',size:[640,640],distance:'57.9 million km',diameter:'4,879 km',gravity:'3.7 m/s²',day:'176 Earth days',year:'88 Earth days',moons:'0',temperature:'167°C',fact:'A day on Mercury lasts longer than two of its years.'},
+    {visual:'assets/explore/intelligence/venus.webp',size:[640,640],distance:'108.2 million km',diameter:'12,104 km',gravity:'8.9 m/s²',day:'117 Earth days',year:'225 Earth days',moons:'0',temperature:'464°C',fact:'Venus spins backward compared with most planets.'},
+    {visual:'assets/explore/intelligence/earth.webp',size:[640,638],distance:'149.6 million km',diameter:'12,756 km',gravity:'9.8 m/s²',day:'24 hours',year:'365.2 Earth days',moons:'1',temperature:'15°C',fact:'Earth is the only known world with liquid oceans on its surface.'},
+    {visual:'assets/explore/intelligence/mars.webp',size:[632,640],distance:'228 million km',diameter:'6,792 km',gravity:'3.7 m/s²',day:'24.7 hours',year:'687 Earth days',moons:'2',temperature:'−65°C',fact:'Olympus Mons rises about 22 km above the Martian plain.'},
+    {visual:'assets/explore/intelligence/jupiter.webp',size:[505,480],distance:'778.5 million km',diameter:'142,984 km',gravity:'23.1 m/s²',day:'9.9 hours',year:'11.9 Earth years',moons:'115',temperature:'−110°C',fact:'Jupiter’s Great Red Spot is a storm observed for centuries.'},
+    {visual:'assets/explore/intelligence/saturn.webp',size:[560,244],distance:'1.432 billion km',diameter:'120,536 km',gravity:'9.0 m/s²',day:'10.7 hours',year:'29.4 Earth years',moons:'293',temperature:'−140°C',fact:'Saturn’s rings are made chiefly of countless pieces of ice.'},
+    {visual:'assets/explore/intelligence/uranus.webp',size:[491,480],distance:'2.867 billion km',diameter:'51,118 km',gravity:'8.7 m/s²',day:'17.2 hours',year:'84 Earth years',moons:'29',temperature:'−195°C',fact:'Uranus rotates on its side, giving it extreme seasons.'},
+    {visual:'assets/explore/intelligence/neptune.webp',size:[474,480],distance:'4.515 billion km',diameter:'49,528 km',gravity:'11.0 m/s²',day:'16.1 hours',year:'165 Earth years',moons:'16',temperature:'−200°C',fact:'Neptune was predicted by mathematics before it was seen.'}
   ];
   const measureNames = [['distance','Distance from Sun'],['diameter','Diameter'],['gravity','Surface gravity'],['day','Length of day'],['year','Length of year'],['moons','Known moons'],['temperature','Mean temperature']];
   const title = panel.querySelector('#intelligence-title');
-  const close = panel.querySelector('.intelligence-close');
-  const back = panel.querySelector('.intelligence-prev');
-  const forward = panel.querySelector('.intelligence-next');
+  const closeButtons = [...panel.querySelectorAll('.intelligence-close, .intelligence-mobile-close')];
+  const backButtons = [...panel.querySelectorAll('.intelligence-prev, .intelligence-mobile-prev')];
+  const forwardButtons = [...panel.querySelectorAll('.intelligence-next, .intelligence-mobile-next')];
   const announcement = panel.querySelector('#intelligence-announcement');
   let selected = -1;
 
@@ -67,6 +67,7 @@
 
   function show(i, scroll = true) {
     if (i < 0 || i >= worlds.length) return;
+    const readingPosition = window.scrollY;
     const world = worlds[i];
     const data = intelligence[i];
     if (selected >= 0 && selected !== i) worlds[selected].querySelector('details').open = false;
@@ -78,19 +79,28 @@
       item.querySelector('summary').setAttribute('aria-expanded', String(active));
     });
     const image = world.querySelector('.solar-portrait img');
+    const portrait = panel.querySelector('.intelligence-image');
+    panel.dataset.planet = world.querySelector('h3').textContent.toLowerCase();
     panel.querySelector('.intelligence-index').textContent = `${String(i + 1).padStart(2, '0')} — 08`;
     panel.querySelector('.intelligence-data-title span').textContent = `${String(i + 1).padStart(2, '0')} / 08`;
-    panel.querySelector('.intelligence-image').src = image.getAttribute('src');
-    panel.querySelector('.intelligence-image').alt = image.alt;
+    portrait.src = data.visual;
+    portrait.alt = image.alt;
+    portrait.width = data.size[0];
+    portrait.height = data.size[1];
     panel.querySelector('.intelligence-class').textContent = world.querySelector('.solar-meta').textContent.replace(/^\s*\d+\s*/, '').trim();
     title.textContent = world.querySelector('h3').textContent;
     panel.querySelector('.intelligence-fact').textContent = data.fact;
     panel.querySelector('.intelligence-measures').innerHTML = measureNames.map(([key,label]) => `<div><dt>${label}</dt><dd>${data[key]}</dd></div>`).join('');
     panel.querySelector('.intelligence-source').href = world.querySelector('.solar-note a').href;
-    back.disabled = i === 0;
-    forward.disabled = i === worlds.length - 1;
-    back.setAttribute('aria-label', i > 0 ? `Previous planet: ${worlds[i - 1].querySelector('h3').textContent}` : 'No previous planet');
-    forward.setAttribute('aria-label', i < worlds.length - 1 ? `Next planet: ${worlds[i + 1].querySelector('h3').textContent}` : 'No next planet');
+    panel.querySelector('.intelligence-mobile-position').textContent = `${String(i + 1).padStart(2, '0')} / 08`;
+    backButtons.forEach(button => {
+      button.disabled = i === 0;
+      button.setAttribute('aria-label', i > 0 ? `Previous planet: ${worlds[i - 1].querySelector('h3').textContent}` : 'No previous planet');
+    });
+    forwardButtons.forEach(button => {
+      button.disabled = i === worlds.length - 1;
+      button.setAttribute('aria-label', i < worlds.length - 1 ? `Next planet: ${worlds[i + 1].querySelector('h3').textContent}` : 'No next planet');
+    });
     announcement.textContent = `${title.textContent}. ${panel.querySelector('.intelligence-class').textContent}. Planet intelligence updated.`;
     panel.inert = false;
     panel.removeAttribute('aria-hidden');
@@ -101,8 +111,8 @@
     if (mobile.matches) gallery.scrollTo({left: offset(world), behavior: reducedMotion.matches ? 'instant' : 'smooth'});
     if (scroll) {
       panel.scrollIntoView({behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start'});
-      close.focus({preventScroll:true});
-    }
+      (mobile.matches ? panel.querySelector('.intelligence-mobile-close') : closeButtons[0]).focus({preventScroll:true});
+    } else if (mobile.matches) requestAnimationFrame(() => window.scrollTo({top:readingPosition, behavior:'instant'}));
   }
 
   worlds.forEach((world, i) => {
@@ -115,9 +125,9 @@
       else if (selected === i) hide();
     });
   });
-  close.addEventListener('click', () => hide(true));
-  back.addEventListener('click', () => show(selected - 1, false));
-  forward.addEventListener('click', () => show(selected + 1, false));
+  closeButtons.forEach(button => button.addEventListener('click', () => hide(true)));
+  backButtons.forEach(button => button.addEventListener('click', () => show(selected - 1, false)));
+  forwardButtons.forEach(button => button.addEventListener('click', () => show(selected + 1, false)));
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && selected >= 0) { hide(true); event.preventDefault(); }
   });

@@ -8,6 +8,8 @@ Five locally optimized WebP portraits from [NASA's planet gallery](https://scien
 - Uranus: Voyager 2, PIA18182 — NASA / JPL-Caltech.
 - Neptune: Voyager 2, PIA01492 — NASA / JPL. This historic image uses enhanced color.
 
-Earth, Venus and Mars reuse the existing `assets/ui/*-thumbnail.webp` assets; their originals and the main hero textures are unchanged. Portraits are illustrative, not to scale or consistently natural-color.
+Earth, Venus and Mars reuse the existing `assets/ui/*-thumbnail.webp` assets in the gallery; their originals and the main hero textures are unchanged. Portraits are illustrative, not to scale or consistently natural-color.
+
+The expanded Planet Intelligence view uses panel-specific transparent WebP portraits in `assets/explore/intelligence/`. Mercury, Jupiter, Saturn, Uranus and Neptune are optimized from the portraits above. Earth, Venus and Mars are optimized from the existing 2048px source artwork in `assets/`. The gallery and Three.js hero assets remain unchanged.
 
 Educational facts and field notes link directly to each planet's NASA facts page in the section. NASA is a source, not an affiliate or endorser of this fictional SpaceEdu demo.

@@ -15,18 +15,18 @@
     if (inner) observer.observe(inner);
   }
 
-  const startBtn = document.querySelector('.final-cta-btn-primary');
-  const exploreBtn = document.querySelector('.final-cta-btn-secondary');
-  startBtn?.addEventListener('click', () => {
-    const target = document.querySelector('#start-exploring');
+  const exploreAgainBtn = document.querySelector('.final-cta-btn-primary');
+  const startLearningBtn = document.querySelector('.final-cta-btn-secondary');
+  exploreAgainBtn?.addEventListener('click', () => {
+    const target = document.querySelector('#solar-system');
     if (target) {
       if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
       target.focus({ preventScroll: true });
       target.scrollIntoView({ behavior: motion.matches ? 'instant' : 'smooth' });
     }
   });
-  exploreBtn?.addEventListener('click', () => {
-    const target = document.querySelector('#solar-system');
+  startLearningBtn?.addEventListener('click', () => {
+    const target = document.querySelector('#start-exploring');
     if (target) {
       if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
       target.focus({ preventScroll: true });

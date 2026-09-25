@@ -88,10 +88,10 @@ p.lede br{display:none}
   .navrow{min-height:76px}.burger{display:flex}
   .links{position:absolute;top:84px;right:0;z-index:5;width:min(320px,calc(100vw - 2 * var(--gutter)));max-height:calc(100svh - 108px);overflow-y:auto;display:flex;flex-direction:column;align-items:stretch;gap:0;padding:12px;border-radius:16px;background:#09152af5;border:1px solid #ffffff24;box-shadow:0 16px 40px #0005;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .2s,transform .2s,visibility .2s}
   .navrow[data-open="true"] .links{opacity:1;visibility:visible;transform:none}
-  .links a{justify-content:flex-start;min-height:48px;padding:12px 16px}
-  .links a+a{border-top:1px solid #ffffff12}
+  .links a,.links button{justify-content:flex-start;min-height:48px;padding:12px 16px}
+  .links>*+*{border-top:1px solid #ffffff12}
   .links a[aria-current="page"]::after{left:16px;right:auto;bottom:5px;width:24px}
-  .links a.enroll{margin:12px 0 0;justify-content:center}
+  .links a.enroll,.links button.enroll{margin:12px 0 0;justify-content:center}
   .copy{padding-top:44px}
   .cta{gap:16px;grid-template-columns:minmax(140px,1fr) auto minmax(140px,1fr)}
   .planet img{width:64px;height:64px}.planet{min-height:76px;gap:6px}.label{font-size:14px;padding:7px 8px}
@@ -129,6 +129,11 @@ p.lede br{display:none}
   .navrow{min-height:72px}.copy{padding-top:28px;padding-bottom:200px}
   h1.title{font-size:72px;margin-top:12px}.rule{margin-top:16px}
   p.lede{font-size:16px;max-width:620px;margin-top:18px}.cta{margin-top:24px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .site-loader::before,.loader-orbit,.stars,.planet-l,.planet-r,.planet img.is-shown,.scroll svg{animation:none!important}
+  .site-loader,.stage,.loader-active .stage,.loader-revealed .stage,.loader-leaving .site-loader,.links a,.links button,.cta>a,.planet,.burger span,.scroll{transition:none!important}
 }
 
 /* Existing entrance choreography, retained. */

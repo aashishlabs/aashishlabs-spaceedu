@@ -50,7 +50,8 @@
 .intelligence-orbit::before,.intelligence-orbit::after{content:"";position:absolute;border:1px solid #78c9dd35;border-radius:50%;pointer-events:none}
 .intelligence-orbit::before{inset:8%}
 .intelligence-orbit::after{inset:-3%;border-style:dashed;opacity:.5}
-.intelligence-image{position:relative;display:block;width:90%;height:90%;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 20px 24px #0008)}
+.intelligence-image{position:relative;display:block;width:auto;height:auto;max-width:88%;max-height:88%;object-fit:contain;filter:drop-shadow(0 20px 24px #0008) drop-shadow(0 0 18px #5ec9e31a);image-rendering:auto}
+.solar-intelligence[data-planet="saturn"] .intelligence-image{max-width:100%;max-height:78%}
 .intelligence-class{color:var(--cyan);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}
 .intelligence-identity h3{font-family:var(--font-serif);font-size:clamp(36px,4vw,66px);font-weight:400;line-height:1.16;letter-spacing:-.045em;overflow-wrap:anywhere}
 .intelligence-fact-label{margin-top:24px;color:#89adbd;font-size:10px;letter-spacing:.14em}
@@ -65,6 +66,7 @@
 .intelligence-context{margin-top:16px;color:#91abba;font-size:11px;line-height:1.55;max-width:67ch}
 .intelligence-source{display:inline-flex;align-items:center;gap:14px;margin-top:12px;min-height:44px;color:var(--cyan);font-size:13px;text-decoration:none}
 .intelligence-bottom{border-top:1px solid #aecbd32a}
+.intelligence-mobile-tools{display:none}
 .intelligence-navigation{display:flex;gap:12px}
 .intelligence-navigation button{min-height:44px;padding:0 16px;border:1px solid #aecbd348;border-radius:24px;background:#b8eaff08;color:#e4f2f8;cursor:pointer;font-size:13px;letter-spacing:0}
 .intelligence-navigation button:hover:not(:disabled),.intelligence-close:hover,.intelligence-source:hover{color:var(--cyan)}
@@ -98,7 +100,15 @@
  .solar-caption a{margin:6px 0 0;display:block;min-height:44px}
  .solar-intelligence{margin-inline:var(--gutter);scroll-margin-top:12px}
  .solar-intelligence.is-open{margin-top:18px}
+ .solar-intelligence.is-open .intelligence-inner{overflow:visible}
  .intelligence-topline,.intelligence-bottom{padding:10px 18px}
+ .intelligence-topline .intelligence-close{display:none}
+ .intelligence-mobile-tools{position:sticky;top:max(0px,env(safe-area-inset-top));z-index:5;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) 44px;align-items:center;gap:5px;min-height:56px;padding:6px 12px;border-bottom:1px solid #aecbd33b;background:#091d2bf2;box-shadow:0 12px 28px #02091266;backdrop-filter:blur(12px)}
+ .intelligence-mobile-tools button{min-width:0;min-height:44px;padding:0 10px;border:1px solid #aecbd348;border-radius:24px;background:#b8eaff08;color:#e4f2f8;font-size:12px;cursor:pointer}
+ .intelligence-mobile-tools button:disabled{opacity:.35;cursor:default}
+ .intelligence-mobile-tools button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+ .intelligence-mobile-position{padding-inline:5px;color:#92adbd;font-size:10px;letter-spacing:.08em;white-space:nowrap;font-variant-numeric:tabular-nums}
+ .intelligence-mobile-close{font-size:24px!important;padding:0!important}
  .intelligence-eyebrow{font-size:10px;letter-spacing:.1em}
  .intelligence-layout{grid-template-columns:1fr}
  .intelligence-profile{grid-template-columns:126px minmax(0,1fr);gap:12px;padding:22px 18px 26px;border-right:0;border-bottom:1px solid #aecbd32a;text-align:left}
@@ -113,8 +123,6 @@
  .intelligence-measures dt{font-size:12px}
  .intelligence-measures dd{text-align:right;font-size:16px}
  .intelligence-context{font-size:11px}
- .intelligence-bottom>span{display:none}
- .intelligence-navigation{width:100%;justify-content:space-between}
- .intelligence-navigation button{min-width:116px}
+ .intelligence-bottom{display:none}
 }
 @media(prefers-reduced-motion:reduce){.solar-portrait img,.solar-portrait::before,.solar-open>span,.solar-intelligence{transition:none}.solar-world summary:hover .solar-portrait img{transform:none}.intelligence-inner.is-changing .intelligence-layout{animation:none}}
