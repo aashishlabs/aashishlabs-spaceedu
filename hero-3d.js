@@ -141,7 +141,8 @@ export async function createHero({ host, initial, onFailure, onCommit, onProgres
     if (mobileFraming) {
       const controls = host.closest('.stage').querySelector('.cta');
       const controlsBottom = controls.getBoundingClientRect().bottom - top;
-      horizon = Math.max(horizon, 2 * (controlsBottom + 30) / height - 1 + radius * .02);
+      const clearance = matchMedia('(min-width: 375px) and (max-width: 440px) and (orientation: portrait)').matches ? 10 : 30;
+      horizon = Math.max(horizon, 2 * (controlsBottom + clearance) / height - 1 + radius * .02);
     }
     for (const world of worlds.values()) {
       if (world.name === 'venus') {
