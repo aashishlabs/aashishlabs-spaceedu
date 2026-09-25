@@ -9,20 +9,21 @@ function noise(x,y,z) {
 }
 (async()=>{
   await sharp('assets/textures/earth_clouds.png').resize(2048,1024).webp({quality:88,alphaQuality:90}).toFile('assets/textures/earth_clouds.webp');
-  const width=1024,height=512,data=Buffer.alloc(width*height*3);
+  const width=2048,height=1024,data=Buffer.alloc(width*height*3);
   for(let y=0;y<height;y++) for(let x=0;x<width;x++) {
     const lon=x/width*Math.PI*2,lat=y/(height-1)*Math.PI;
     const a=Math.cos(lon)*Math.sin(lat),b=Math.cos(lat),c=Math.sin(lon)*Math.sin(lat);
     const warp=noise(a*3+8,b*3,c*3)*2;
     let density=0,amp=.43;
     for(let octave=0;octave<6;octave++) {const f=3*2**octave;density+=amp*noise(a*f+warp,b*f*1.7+warp,c*f);amp*=.58;}
-    // Fine, warped ribbons give the cloud deck structure without larger textures.
-    const filaments=noise(a*18+warp,b*24,c*18);
-    const bands=Math.sin(b*42+warp*7+a*3+filaments*2)*.09;
-    const t=Math.max(0,Math.min(1,(density+bands-.16)*1.5));
+    // Fine, warped ribbons give the cloud deck structure at a modest file size.
+    const filaments=noise(a*28+warp,b*36,c*28);
+    const wisps=noise(a*76+warp,b*82,c*76);
+    const bands=Math.sin(b*48+warp*7+a*3+filaments*3)*.095;
+    const t=Math.max(0,Math.min(1,(density+bands+(wisps-.5)*.035-.16)*1.65));
     const i=(y*width+x)*3;
     data[i]=mix(150,242,t);data[i+1]=mix(124,225,t);data[i+2]=mix(84,185,t);
   }
-  await sharp(data,{raw:{width,height,channels:3}}).webp({quality:90}).toFile('assets/textures/venus_clouds.webp');
-  console.log('Prepared 2K Earth clouds and 1K procedural Venus clouds.');
+  await sharp(data,{raw:{width,height,channels:3}}).webp({quality:88}).toFile('assets/textures/venus_clouds.webp');
+  console.log('Prepared 2K Earth and Venus clouds.');
 })().catch(error=>{console.error(error);process.exitCode=1});

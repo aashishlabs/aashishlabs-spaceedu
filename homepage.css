@@ -76,6 +76,7 @@ p.lede br{display:none}
 }
 @media(max-width:600px){
   :root{--gutter:20px}
+  .stage{min-height:max(1080px,123svh)}
   .logo{font-size:20px}
   .copy{padding-top:36px;padding-bottom:max(220px,28svh)}
   .eyebrow{font-size:15px;letter-spacing:.24em}
@@ -90,6 +91,7 @@ p.lede br{display:none}
   .label{font-size:13px;letter-spacing:.12em;padding:7px 6px}
 }
 @media(max-width:360px){.planet img{width:52px;height:52px}.planet{min-height:66px}}
+@media(max-width:1000px) and (max-height:500px) and (orientation:landscape) and (pointer:coarse){.stage{min-height:860px}}
 @media(max-height:500px) and (min-width:601px){
   .navrow{min-height:72px}.copy{padding-top:28px;padding-bottom:200px}
   h1.title{font-size:72px;margin-top:12px}.rule{margin-top:16px}

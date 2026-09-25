@@ -9,6 +9,7 @@ export async function createHero({ host, initial, onFailure, onCommit, onProgres
     renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
   } catch (error) { throw error; }
   const scene = new THREE.Scene();
+  const mobileView = matchMedia('(max-width: 600px), (max-width: 1000px) and (max-height: 500px) and (orientation: landscape) and (pointer: coarse)');
   const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, .1, 20);
   camera.position.z = 5;
   const ambient = new THREE.AmbientLight(0xb7c9ec, .24);
@@ -106,10 +107,10 @@ export async function createHero({ host, initial, onFailure, onCommit, onProgres
       glow.scale.setScalar(isEarth ? 1.01 : name === 'venus' ? 1.017 : 1.004);
       glow.renderOrder = 3;
       group.add(glow);
-      group.rotation.set(.18, isEarth ? 2.2 : .5, -.12);
+      group.rotation.set(.18, isEarth ? 2.2 : name === 'mars' && mobileView.matches ? 1.46 : .5, -.12);
       group.visible = false;
       scene.add(group);
-      const world = { name, group, clouds, cloudShadow, material, glow, cloudOpacity: name === 'venus' ? .94 : .78 };
+      const world = { name, group, clouds, cloudShadow, material, glow, cloudOpacity: name === 'venus' ? (mobileView.matches ? .72 : .94) : .78 };
       worlds.set(name, world);
       return world;
     })();
@@ -130,18 +131,23 @@ export async function createHero({ host, initial, onFailure, onCommit, onProgres
     const aspect = width / height;
     camera.left = -aspect; camera.right = aspect;
     camera.updateProjectionMatrix();
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, width < 600 ? 1.5 : 2));
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
     renderer.setSize(width, height);
-    // Match the original full-bleed horizon, including portrait and short screens.
-    radius = width < 600 ? 1.1 : 1.35;
+    // Keep the desktop horizon; give touch layouts a lower, larger interaction area.
+    const mobileFraming = mobileView.matches;
+    radius = mobileFraming ? .96 : 1.35;
     horizon = height < 621 ? .34 : .08;
     // Keep the mobile globe (including its atmosphere) below the selector row.
-    if (matchMedia('(max-width: 600px)').matches) {
+    if (mobileFraming) {
       const controls = host.closest('.stage').querySelector('.cta');
       const controlsBottom = controls.getBoundingClientRect().bottom - top;
-      horizon = Math.max(horizon, 2 * (controlsBottom + 24) / height - 1 + radius * .02);
+      horizon = Math.max(horizon, 2 * (controlsBottom + 30) / height - 1 + radius * .02);
     }
     for (const world of worlds.values()) {
+      if (world.name === 'venus') {
+        world.cloudOpacity = mobileFraming ? .72 : .94;
+        world.clouds.material.opacity = world.cloudOpacity * world.material.opacity;
+      }
       world.group.scale.setScalar(radius);
       world.group.position.set(0, -radius - horizon, 0);
     }
